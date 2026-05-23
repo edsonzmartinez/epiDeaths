@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-epiDeaths is an R package designed to provide functions for calculating mortality indicators. It provides functions for calculating mortality indicators. These include geometric interpolation between two periods and projections for future years, as described in the textbook by Laurenti, Mello Jorge, Lebrão and Gotlieb (2005), the standardised mortality ratio (Bruce, Pope and Stanistreet, 2018), the age-adjusted mortality rate (direct standardisation), years of potential life lost (Gardner and Sanborn, 1990; Ma, Ward, Siegel and Jemal, 2015), and age-standardised years of potential life lost (Silva Filho et al., 2024). Confidence intervals for the standardised mortality ratio are obtained according to Vandenbroucke (1982) and Ulm (1990). The function also includes a function that produces a graph similar to an age pyramid.
+epiDeaths is an R package designed to provide functions for calculating mortality indicators. These include geometric interpolation between two periods and projections for future years, as described in the textbook by Laurenti, Mello Jorge, Lebrão and Gotlieb (2005), the standardised mortality ratio (Bruce, Pope and Stanistreet, 2018), the age-adjusted mortality rate (direct standardisation), years of potential life lost (Gardner and Sanborn, 1990; Ma, Ward, Siegel and Jemal, 2015), and age-standardised years of potential life lost (Silva Filho et al., 2024). Confidence intervals for the standardised mortality ratio are obtained according to Vandenbroucke (1982) and Ulm (1990). The function also includes a function that produces a graph similar to an age pyramid.
 
 ## Installation
 

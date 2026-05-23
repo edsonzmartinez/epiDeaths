@@ -7,10 +7,9 @@
 <!-- badges: end -->
 
 epiDeaths is an R package designed to provide functions for calculating
-mortality indicators. It provides functions for calculating mortality
-indicators. These include geometric interpolation between two periods
-and projections for future years, as described in the textbook by
-Laurenti, Mello Jorge, Lebrão and Gotlieb (2005), the standardised
+mortality indicators. These include geometric interpolation between two
+periods and projections for future years, as described in the textbook
+by Laurenti, Mello Jorge, Lebrão and Gotlieb (2005), the standardised
 mortality ratio (Bruce, Pope and Stanistreet, 2018), the age-adjusted
 mortality rate (direct standardisation), years of potential life lost
 (Gardner and Sanborn, 1990; Ma, Ward, Siegel and Jemal, 2015), and
