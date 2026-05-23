@@ -1,7 +1,5 @@
 url: https://edsonzmartinez.github.io/epiDeaths/
 template:
+  bootstrap: 5
   bslib:
-    version: 5
-    bg: "#202123"
-    fg: "#B8BCC2"
-    primary: "#306cc9"
+    bootswatch: lux
