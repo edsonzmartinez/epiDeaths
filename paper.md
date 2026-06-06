@@ -248,6 +248,8 @@ $$ ASYPLL = \sum\limits_{i=1}^{K^*} \dfrac{a_i d_i}{p_i} N_i,$$
 
 where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, $d_i$ is the number of deaths in the $i$-th age group (`d`), $p_i$ is the population size for each age group within the study population (`pop`), and $N_i$ the population size for each age group within the reference population (`Nref`) (Silva Filho et al., 2024).
 
+The `stdYPLL()` function of the `epiDeaths` package calculates the ASYPLL for a specific cause of death. 
+
 
 # State of the field                                                                                                                  
 
