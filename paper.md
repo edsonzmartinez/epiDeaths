@@ -362,7 +362,7 @@ $estimate
 
 The first component (`out`) is a matrix containing the number of deaths
 in each age group, the correspondent midpoint of age, the difference
-between the midpoint of age and K, and the product $`a_i d_i`$. The
+between the midpoint of age and $`K`$, and the product $`a_i d_i`$. The
 second component (`estimate`) refers to the years of potential life lost
 for this specific cause of death. The YPLL rate per 100,000 population
 is typically calculated as
