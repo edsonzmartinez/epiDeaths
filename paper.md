@@ -1,31 +1,36 @@
 # Summary
 
 The epiDeaths package is an open-source R package designed for
-calculating mortality indicators.
+calculating mortality indicators. The package enables tr
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics.
-Python enables wrapping low-level languages (e.g., C) for speed without
-losing flexibility or ease-of-use in the user-interface. The API for
-`Gala` was designed to provide a class-based and user-friendly interface
-to fast (C or Cython-optimized) implementations of common operations
-such as gravitational potential and force evaluation, orbit integration,
-dynamical transformations, and chaos indicators for nonlinear dynamics.
-`Gala` also relies heavily on and interfaces well with the
-implementations of physical units and astronomical coordinate systems in
-the `Astropy` package \[@astropy\] (`astropy.units` and
-`astropy.coordinates`).
+Studies of mortality are essential for public health. These
+epidemiological studies enable us to identify the leading causes of
+death in different regions and age groups, helping governments to
+prioritise investment in areas such as sanitation and infrastructure,
+and evaluate the effectiveness of public policies established to ensure
+integral health care within a given population. Different type of
+mortality indicators are used to understand mortality trend in an
+population, as the standardized mortality ratio, the age-adjusted
+mortality rate, the years of potential life lost, and the
+age‐standardized years of potential life lost. `epiDeaths` is an R
+package that provides functions designed to make it easier to obtain
+these mortality indicators.
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has
-already been used in a number of scientific publications
-\[@Pearson:2017\] and has also been used in graduate courses on Galactic
-dynamics to, e.g., provide interactive visualizations of textbook
-material \[@Binney:2008\]. The combination of speed, design, and support
-for Astropy functionality in `Gala` will enable exciting scientific
-explorations of forthcoming data releases from the *Gaia* mission
-\[@gaia\] by students and experts alike.
+`epiDeaths` is available both on GitHub (repo; docs) and CRAN, and was
+designed to be used by epidemiological researchers, professionals
+working in public health surveillance, and by students in courses on
+epidemiology or public health. It can significantly reduce the time
+spent calculating indicators, which are often produced using
+spreadsheets.
+
+# Usage
+
+The function
+[`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
+calculates the age-adjusted mortality rate based on direct
+standardisation.
 
 # State of the field
 
