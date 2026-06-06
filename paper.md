@@ -38,7 +38,7 @@ The epiDeaths package is an open-source R package designed for calculating morta
 
 Studies of mortality are essential for public health. They enable us to identify the leading causes of death in different regions and age groups, helping governments to prioritise investment in areas such as sanitation and infrastructure, and evaluate the effectiveness of public policies established to ensure integral health care within a given population. Different type of mortality indicators are used to understand mortality trend in an population, as the standardized mortality ratio, the age-adjusted mortality rate, the years of potential life lost, and the age‐standardized years of potential life lost. `epiDeaths` is an R package that provides functions designed to make it easier to obtain these mortality indicators. 
 
-`epiDeaths` is available both on GitHub (repo; docs) and CRAN, and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets.
+`epiDeaths` is available both on GitHub (repo; docs) and CRAN, and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets, such as Microsoft Excel.
 
 # Usage
 
