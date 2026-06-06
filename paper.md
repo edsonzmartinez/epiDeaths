@@ -5,18 +5,17 @@ calculating mortality indicators. The package enables tr
 
 # Statement of need
 
-Studies of mortality are essential for public health. These
-epidemiological studies enable us to identify the leading causes of
-death in different regions and age groups, helping governments to
-prioritise investment in areas such as sanitation and infrastructure,
-and evaluate the effectiveness of public policies established to ensure
-integral health care within a given population. Different type of
-mortality indicators are used to understand mortality trend in an
-population, as the standardized mortality ratio, the age-adjusted
-mortality rate, the years of potential life lost, and the
-age‐standardized years of potential life lost. `epiDeaths` is an R
-package that provides functions designed to make it easier to obtain
-these mortality indicators.
+Studies of mortality are essential for public health. They enable us to
+identify the leading causes of death in different regions and age
+groups, helping governments to prioritise investment in areas such as
+sanitation and infrastructure, and evaluate the effectiveness of public
+policies established to ensure integral health care within a given
+population. Different type of mortality indicators are used to
+understand mortality trend in an population, as the standardized
+mortality ratio, the age-adjusted mortality rate, the years of potential
+life lost, and the age‐standardized years of potential life lost.
+`epiDeaths` is an R package that provides functions designed to make it
+easier to obtain these mortality indicators.
 
 `epiDeaths` is available both on GitHub (repo; docs) and CRAN, and was
 designed to be used by epidemiological researchers, professionals
@@ -26,6 +25,8 @@ spent calculating indicators, which are often produced using
 spreadsheets.
 
 # Usage
+
+## Age-adjusted mortality rates
 
 Age-adjusted rates were developed in 1841 for the analysis of mortality
 data (3). It are used to compare relative mortality risks among groups
@@ -201,6 +202,104 @@ death rate for the standard population (see Bruce et al., 2018,
 p. 110)), and `tabm` (a matrix containing `d`, `pop`, `dref`, `Nref` and
 the expected number of deaths at each age group).
 
+## Population interpolation and extrapolation
+
+Population interpolation and extrapolation are techniques used to
+estimate population sizes for years where official census data is
+unavailable. Temporal interpolation estimates population values for
+years between two official demographic census periods. This is essential
+for calculating mortality indicators between census years. The
+[`interpol()`](https://edsonzmartinez.github.io/epiDeaths/reference/interpol.md)
+function uses geometric interpolation to calculate intermediate values
+between a starting value and an ending value. The growth rate by sex (s)
+and age group (x) is given by
+
+``` math
+r_{sx} = \left(\dfrac{pop_{1sx}}{pop_{2sx}}\right)^{1/\Delta t} - 1
+```
+
+where $`pop_{1sx}`$ and $`pop_{2sx}`$ are the populations for the
+initial and final data points, respectively, and $`\Delta t`$ is the
+time elapsed between the two dates. As a first example, let us consider
+the 1970 and 1980 Brazilian Population Censuses. According to the 1970
+census, the Brazilian population was 93,215,300, whereas according to
+the 1980 census, it was 119,098,992 (Laurenti et al. (1985), page 34).
+Thus, the function
+
+``` r
+
+interpol(93215300, 119098992, 1970, 1980)
+```
+
+returns
+
+``` r
+$rsx
+[1] 0.02480701
+
+$interpdata
+         1970     1971     1972      1973      1974      1975      1976
+[1,] 93215300 95527693 97897450 100325993 102814781 105365309 107979107
+          1977      1978      1979      1980
+[1,] 110657746 113402834 116216020 119098992
+```
+
+The
+[`interpol()`](https://edsonzmartinez.github.io/epiDeaths/reference/interpol.md)
+function returns a list with two components, `rsx` (the growth rates)
+and `interpdata` (a matrix of the intermediate values).
+
+Consider another example given by
+
+``` r
+
+pop1 <- c(2126148L, 775746L, 884602L, 957100L, 911673L, 812483L, 747361L, 688740L,
+           614103L, 501228L, 386337L, 274949L, 216546L)
+pop2 <- c(1787296L, 648467L, 752059L, 783322L, 808350L, 881275L, 892896L, 771218L,
+           713233L, 649157L, 581323L, 472760L, 356725L)
+out  <- interpol(pop1,pop2,from=2010,to=2022)
+```
+
+In this case, `pop1` and `pop2` are vectors of the same size,
+representing population counts in different areas or different age
+groups. The function thus returns the following:
+
+``` r
+$rsx
+ [1] -0.014363187 -0.014823536 -0.013435843 -0.016558380 -0.009973782  0.006795882  0.014937277  0.009470164
+ [9]  0.012548538  0.021785029  0.034636035  0.046202407  0.042474119
+
+$interpdata
+         2010    2011    2012    2013    2014    2015    2016    2017    2018    2019    2020    2021    2022
+ [1,] 2126148 2095610 2065510 2035843 2006602 1977780 1949373 1921374 1893777 1866576 1839766 1813341 1787296
+ [2,]  775746  764247  752918  741757  730761  719929  709257  698743  688386  678181  668128  658224  648467
+ [3,]  884602  872717  860991  849423  838010  826751  815643  804684  793872  783206  772683  762301  752059
+ [4,]  957100  941252  925666  910339  895265  880441  865862  851525  837425  823559  809922  796511  783322
+ [5,]  911673  902580  893578  884666  875842  867107  858458  849896  841420  833028  824719  816494  808350
+ [6,]  812483  818005  823564  829160  834795  840468  846180  851931  857720  863549  869418  875326  881275
+ [7,]  747361  758525  769855  781354  793026  804871  816894  829096  841481  854050  866807  879755  892896
+ [8,]  688740  695262  701847  708493  715203  721976  728813  735715  742683  749716  756816  763983  771218
+ [9,]  614103  621809  629612  637513  645512  653613  661815  670119  678528  687043  695664  704394  713233
+[10,]  501228  512147  523304  534705  546353  558255  570417  582844  595541  608515  621771  635317  649157
+[11,]  386337  399718  413563  427887  442707  458041  473906  490320  507303  524874  543053  561862  581323
+[12,]  274949  287652  300943  314847  329393  344612  360534  377192  394619  412851  431926  451882  472760
+[13,]  216546  225744  235332  245327  255747  266610  277934  289739  302046  314875  328249  342191  356725
+```
+
+Population extrapolation projects a population size for a time beyond
+the available data points. The
+[`project()`](https://edsonzmartinez.github.io/epiDeaths/reference/project.md)
+function estimate values for a given year denoted by `x` based on growth
+rates calculated by geometric interpolation between `from` and `to`. For
+example,
+
+``` r
+
+project(100, 200, from=2010, to=2020, x=2025)
+```
+
+returns $`283`$.
+
 # State of the field
 
 Several tools exist for galactic dynamics computations:  
@@ -302,7 +401,7 @@ e.g. $`f(x) = e^{\pi/x}`$
 
 Double dollars make self-standing equations:
 
-\$\$\Theta(x) = \left\\\begin{array}{l} 0\textrm{ if } x \< 0\cr
+\$\$\Theta(x) = \left{\begin{array}{l} 0\textrm{ if } x \< 0\cr
 1\textrm{ else} \end{array}\right.\$\$
 
 You can also use plain for equations
