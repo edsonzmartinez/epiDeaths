@@ -22,7 +22,7 @@ designed to be used by epidemiological researchers, professionals
 working in public health surveillance, and by students in courses on
 epidemiology or public health. It can significantly reduce the time
 spent calculating indicators, which are often produced using
-spreadsheets.
+spreadsheets, such as Microsoft Excel.
 
 # Usage
 
