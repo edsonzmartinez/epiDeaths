@@ -28,10 +28,178 @@ spreadsheets.
 # Usage
 
 Age-adjusted rates were developed in 1841 for the analysis of mortality
-data (3). The function
+data (3). It are used to compare relative mortality risks among groups
+and over time. The age-adjusted mortality rate (AAMR) enables mortality
+rates to be compared between different populations by taking into
+account the differences in their age structures. It is calculated using
+a standard population as a reference to help eliminate the effect of age
+when making comparisons. According to Curtin and Klein (1995), there are
+two main types of reference population: internal and external. Internal
+reference populations are created using the data to be analysed. For
+example, the authors mention the average age distribution of all
+populations to be compared. One disadvantage of using an internal
+reference population is that the results cannot be compared with those
+obtained in other studies that used a different reference population.
+External reference populations are those that are not used in the data
+analysis. Curtin and Klein (1995) note, for example, that many studies
+typically use US population data provided by the National Center for
+Health Statistics (NCHS) for this purpose.
+
+The
 [`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
-calculates the age-adjusted mortality rate based on direct
-standardisation \[@Bruce:2018\].
+function of the `epiDeaths` package calculates the age-adjusted
+mortality rate using direct standardisation \[@Bruce:2018\]. For
+example,
+
+``` r
+
+d    <- c(15,31,78)
+pop  <- c(4100,3000,2900)
+Nref <- c(5000,3500,1500)
+AAMR(d,pop,Nref,ages=c(65,75,85,100),fac=1000)
+```
+
+returns
+
+``` r
+$crude
+[1] 12.4
+
+$adj
+[1] 9.480418
+
+$tabm
+         deaths population pop reference expected
+65 to 74     15       4100          5000 18.29268
+75 to 84     31       3000          3500 36.16667
+85 to 99     78       2900          1500 40.34483
+```
+
+Among the arguments of the
+[`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
+function, `d` is a vector containing the number of deaths in each age
+group in the study population, `pop` is a vector containing the
+population size for each age group within the study population, `Nref`
+is a vector containing the population size for each age group within the
+reference population, `ages` is a vector containing the lower limit of
+each age group, and `fac` is a factor used to represent the mortality
+rate as “deaths per fac population” (the default is 1e4). The
+age-adjusted mortality rate (AAMR) is given by the quotient of the sum
+of the expected number of deaths at each age group and the total number
+of people in the standard population, or say,
+
+``` math
+AAMR = fac \times \dfrac{\sum_{i=1}^{I} CDR_i \times N_{P,i}}{N_P},
+```
+
+where $`CDR_i`$ is the crude death rate in the $`i`$-th age group
+($`i=1,...,I`$), $`N_{P,i}`$ is the number of people in the $`i`$-th age
+group in the standard population, and $`N_P`$ is the total number of
+people in the standard population. In the example above, the crude death
+rates are $`CDR_1 = 15/4100`$, $`CDR_2 = 31/3000`$ and
+$`CDR_3 = 78/2900`$. Thus, considering $`fac = 1000`$, we have
+
+``` math
+AAMR = 1000 \times \dfrac{\dfrac{15}{4100} \times 5000 + \dfrac{31}{3000} \times 3500 + \dfrac{78}{2900} \times 1500}{5000 + 3500 + 1500}=9.480418.
+```
+
+The
+[`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
+function returns a list with three components: `crude` (the crude
+mortality rate), `adj` (the age-adjusted mortality rate), and `tabm`, a
+matrix containing `d`, `pop`, `Nref` and `expected` (the expected number
+of deaths at each age group).
+
+The
+[`SMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/SMR.md)
+function calculates the standardized mortality ratio (SMR), a measure
+obtained by the indirect method of standardisation. It compares the
+actual deaths in a study population to the deaths that would be expected
+if that population had the same age/sex-specific mortality rates as a
+standard population. SMR is calculated as
+
+``` math
+SMR = \dfrac{observed\ number\ of\ deaths}{expected\ number\ of\ deaths}
+```
+
+An SMR of 1.0 means that the number of observed deaths is equal to the
+number of expected deaths. An SMR higher than 1.0 indicates
+higher-than-expected mortality, while an SMR lower than 1.0 indicates
+lower-than-expected mortality.
+
+For example,
+
+``` r
+
+d    <- c(1,14,102,259,381,420,328,297)
+pop  <- c(670858,1530547,1591913,1551481,1355325,1068705,604175,332148)
+Nref <- c(7058427,15541422,16281290,15382114,12733791,9626735,5432779,2828223)
+dref <- c(2,136,1185,2826,4188,4311,3384,3071)
+SMR(d,pop,dref,Nref,ages=c(15,20,30,40,50,60,70,80,100))
+```
+
+returns
+
+``` r
+$obs
+[1] 1802
+
+$exp
+[1] 2075.811
+
+$smr
+[1] 0.8680944
+
+$ci
+[1] 0.8284762 0.9086380
+
+$isr
+[1] 1.953614
+
+$tabm
+         deaths population deaths pop reference pop reference    expected
+15 to 19      1     670858                    2       7058427   0.1900871
+20 to 29     14    1530547                  136      15541422  13.3935229
+30 to 39    102    1591913                 1185      16281290 115.8640934
+40 to 49    259    1551481                 2826      15382114 285.0378892
+50 to 59    381    1355325                 4188      12733791 445.7510807
+60 to 69    420    1068705                 4311       9626735 478.5825366
+70 to 79    328     604175                 3384       5432779 376.3319288
+80 to 99    297     332148                 3071       2828223 360.6598589
+```
+
+The arguments of the
+[`SMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/SMR.md)
+function are similar to those of the
+[`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
+function described above, with the addition of the argument `dref`, that
+refers to a vector containing the number of deaths in each age group in
+the reference population. The observed number of deaths is simply given
+by the sum of the elements of the vector ´d´. In this example, it
+amounts to 1,802 deaths. The expected number of deaths is
+
+``` math
+expected = \sum_{i=1}^{I} \dfrac{N_{S,i} \times d_{P,i}}{N_{P,i}},
+```
+
+where $`N_{S,i}`$ is the population size for the $`i`$-th age group
+within the study population ($`i=1,...,I`$), $`d_{P,i}`$ is the number
+of deaths in the $`i`$-th age group in the reference population, and
+$`N_{P,i}`$ is the number of people in the $`i`$-th age group in the
+standard population. In this example, it amounts to 2,075.811 deaths.
+Thus, the SMR is given by $`1,802/2,075.811 = 0.8680944`$.
+
+The
+[`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
+function returns a list with six components: `obs` (the observed number
+of deaths in each age group), `exp` (the expected number of death),
+`smr` (the standardized mortality ratio), `ci` (an approximate 95%
+confidence interval for the SMR by using the method proposed by
+Vandenbroucke (1982)), `isr` (the indirectly standardised mortality rate
+per 10,000 inhabitants, given by 10,000 $`\times`$ SMR $`\times`$ crude
+death rate for the standard population (see Bruce et al., 2018,
+p. 110)), and `tabm` (a matrix containing `d`, `pop`, `dref`, `Nref` and
+the expected number of deaths at each age group).
 
 # State of the field
 
