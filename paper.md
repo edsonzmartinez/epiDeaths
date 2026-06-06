@@ -42,7 +42,8 @@ Studies of mortality are essential for public health. These epidemiological stud
 
 # Usage
 
-The function `AAMR()` calculates the age-adjusted mortality rate based on direct standardisation.
+Age-adjusted rates were developed in 1841 for the analysis of mortality data (3).
+The function `AAMR()` calculates the age-adjusted mortality rate based on direct standardisation [@Bruce:2018]. 
 
 # State of the field                                                                                                                  
 
