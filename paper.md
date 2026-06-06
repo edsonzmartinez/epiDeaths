@@ -388,6 +388,11 @@ population size for each age group within the study population (`pop`),
 and $`N_i`$ the population size for each age group within the reference
 population (`Nref`) (Silva Filho et al., 2024).
 
+The
+[`stdYPLL()`](https://edsonzmartinez.github.io/epiDeaths/reference/stdYPLL.md)
+function of the `epiDeaths` package calculates the ASYPLL for a specific
+cause of death.
+
 # State of the field
 
 Several tools exist for galactic dynamics computations:  
