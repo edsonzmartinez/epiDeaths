@@ -300,6 +300,94 @@ project(100, 200, from=2010, to=2020, x=2025)
 
 returns $`283`$.
 
+## Years of potential life lost
+
+The concept of years of potential life lost (YPLL) involves estimating
+the average time a person would have lived had he or she not died
+prematurely (Gardner and Sanborn, 1990). Let $`d_i`$ represent the
+number of deaths due to a given cause within the $`i`$-th age group. The
+YPLL for this cause of death can be estimated using the following
+equation:
+
+``` math
+YPLL = \sum_{i=1}^{K^*} a_i d_i
+```
+
+where $`K^*`$ is the number of age groups between 0 and $`K`$, $`a_i`$
+is the difference between $`K`$ and the midpoint of age in each age
+group, assuming a uniform distribution of deaths in each group, and
+$`K`$ is the standard age of death. The midpoint of an age group is
+estimated as (lowest age + highest age + 1)/2.
+
+Different authors use different values for $`K`$. According to Bruce et
+al. (2018), historically, WHO has used life expectancy from Japan, this
+being the highest in the world. Other authors uses 75 years as the
+reference age because it approximates US life expectancy (Ma et al.,
+2015).
+
+The
+[`YPLL()`](https://edsonzmartinez.github.io/epiDeaths/reference/YPLL.md)
+function has three arguments, `d` (a vector containing the number of
+deaths in each age group), `ages` (a vector containing the lower limit
+of each age group), and `K` (the standard life expectancy age, the
+default is 75 years). For example,
+
+``` r
+
+d    <- c(1,12,60,100,137,200,225,236,237,258,226)
+ages <- seq(20,70,5)
+YPLL(d,ages,K=75)
+```
+
+returns a list with two components:
+
+``` r
+$out
+           d  mid    a     ad
+20 to 24   1 22.5 52.5   52.5
+25 to 29  12 27.5 47.5  570.0
+30 to 34  60 32.5 42.5 2550.0
+35 to 39 100 37.5 37.5 3750.0
+40 to 44 137 42.5 32.5 4452.5
+45 to 49 200 47.5 27.5 5500.0
+50 to 54 225 52.5 22.5 5062.5
+55 to 59 236 57.5 17.5 4130.0
+60 to 64 237 62.5 12.5 2962.5
+65 to 69 258 67.5  7.5 1935.0
+70 to 74 226 72.5  2.5  565.0
+
+$estimate
+[1] 31530
+```
+
+The first component (`out`) is a matrix containing the number of deaths
+in each age group, the correspondent midpoint of age, the difference
+between the midpoint of age and K, and the product $`a_i d_i`$. The
+second component (`estimate`) refers to the years of potential life lost
+for this specific cause of death. The YPLL rate per 100,000 population
+is typically calculated as
+
+``` math
+ YPLL rate = 100,000 \times \dfrac{YPLL}{Population\ younger\ than\ K\ years}.
+```
+
+Age-standardized years of potential life lost (ASYPLL) involves
+adjusting the YPLL rate of a specific population to a standard
+population structure to allow for fair comparisons across different
+regions or time periods. This measure is given by
+
+``` math
+ ASYPLL = \sum\limits_{i=1}^{K^*} \dfrac{a_i d_i}{p_i} N_i,
+```
+
+where $`K^*`$ is the number of age groups between 0 and $`K`$, $`a_i`$
+is the difference between $`K`$ and the midpoint of age in each age
+group, assuming a uniform distribution of deaths in each group, $`d_i`$
+is the number of deaths in the $`i`$-th age group (`d`), $`p_i`$ is the
+population size for each age group within the study population (`pop`),
+and $`N_i`$ the population size for each age group within the reference
+population (`Nref`) (Silva Filho et al., 2024).
+
 # State of the field
 
 Several tools exist for galactic dynamics computations:  
