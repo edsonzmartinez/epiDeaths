@@ -1,5 +1,6 @@
 ---
 title: 'epiDeaths: a R package for calculating mortality indicators'
+output: html_document
 tags:
   - R
   - epidemiology
@@ -21,6 +22,7 @@ affiliations:
    ror: 036rp1748
 date: 23 May 2026
 bibliography: paper.bib
+link-citations: true
 
 # Journal of Open Source Software
 
