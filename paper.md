@@ -27,10 +27,11 @@ spreadsheets.
 
 # Usage
 
-The function
+Age-adjusted rates were developed in 1841 for the analysis of mortality
+data (3). The function
 [`AAMR()`](https://edsonzmartinez.github.io/epiDeaths/reference/AAMR.md)
 calculates the age-adjusted mortality rate based on direct
-standardisation.
+standardisation \[@Bruce:2018\].
 
 # State of the field
 
