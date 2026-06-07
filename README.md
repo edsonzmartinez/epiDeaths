@@ -11,6 +11,9 @@ status](https://www.r-pkg.org/badges/version/epiDeaths)](https://CRAN.R-project.
 [![](http://cranlogs.r-pkg.org/badges/grand-total/epiDeaths)](https://cran.r-project.org/package=epiDeaths)
 
 <!-- badges: end -->
+<figure>
+<img src="/man/figures/logo.png" height="250"/>
+</figure>
 
 epiDeaths is an R package designed to provide functions for calculating
 mortality indicators. These include geometric interpolation between two
