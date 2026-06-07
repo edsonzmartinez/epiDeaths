@@ -18,11 +18,12 @@ life lost, and the age‐standardized years of potential life lost.
 easier to obtain these mortality indicators.
 
 `epiDeaths` is available both on
-[Github](https://github.com/edsonzmartinez/epiDeaths) and CRAN, and was
-designed to be used by epidemiological researchers, professionals
-working in public health surveillance, and by students in courses on
-epidemiology or public health. It can significantly reduce the time
-spent calculating indicators, which are often produced using
+[Github](https://github.com/edsonzmartinez/epiDeaths) and
+[CRAN](https://cran.r-project.org/web/packages/epiDeaths/index.html),
+and was designed to be used by epidemiological researchers,
+professionals working in public health surveillance, and by students in
+courses on epidemiology or public health. It can significantly reduce
+the time spent calculating indicators, which are often produced using
 spreadsheets, such as Microsoft Excel.
 
 # Usage
