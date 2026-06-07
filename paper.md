@@ -21,12 +21,6 @@ affiliations:
    ror: 036rp1748
 date: 23 May 2026
 bibliography: paper.bib
-
-
-# Journal of Open Source Software
-
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
 aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
 aas-journal: Journal of Open Source Software.
 ---
@@ -254,135 +248,95 @@ $$ ASYPLL = \sum\limits_{i=1}^{K^*} \dfrac{a_i d_i}{p_i} N_i,$$
 
 where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, $d_i$ is the number of deaths in the $i$-th age group (`d`), $p_i$ is the population size for each age group within the study population (`pop`), and $N_i$ the population size for each age group within the reference population (`Nref`) [@Silva].
 
-The `stdYPLL()` function of the `epiDeaths` package calculates the ASYPLL for a specific cause of death. 
+The age‐standardized YPLL rate is given by
 
+$$ ASYPLL\ rate = \dfrac{ASYPLL}{\sum_{i=1}^{K^*} N_i} \times fac.$$
 
-# State of the field                                                                                                                  
+This measure is interpreted in years per $fac$ people, where $fac$ is specified by the argument `fac` (the default is 1e4).
 
-Several tools exist for galactic dynamics computations:                                                     
-`galpy` [@Bovy:2015] is a Python package with similar goals,
-providing orbit integration and potential classes for galactic dynamics.                                                              
-`NEMO` [@Teuben:1995] is a well-established, comprehensive stellar dynamics                                                           
-toolbox written primarily in C, offering extensive functionality but with a                                                           
-steeper learning curve and less integration with modern Python workflows.                                                             
-Other tools like `GalPot` provide specific Milky Way potential models but lack                                                        
-the broader dynamical analysis capabilities.                                                                                          
-                                                                                                                                        
-`Gala` was built rather than contributing to existing projects for several                                                            
-reasons. First, `Gala` was designed from the ground up to integrate seamlessly                                                        
-with the Astropy ecosystem, using `astropy.units` and `astropy.coordinates`                                                           
-as core dependencies rather than optional features. This tight integration                                                            
-enables natural workflows for astronomers already using Astropy. Second,                                                              
-`Gala`'s object-oriented API with consistent interfaces across subpackages                                                            
-(potentials, integrators, dynamics) provides a more modular and extensible                                                            
-design than alternatives available at the time. Third, `Gala` fills a specific                                                        
-niche between simple demonstration codes and full N-body simulation packages                                                          
-like `Gadget` [@Springel:2005] – it focuses on the common tasks in galactic                                                             
-dynamics research (orbit integration, potential evaluation, coordinate                                                                
-transformations) while maintaining both performance through C implementations                                                         
-and usability through its Python interface.  
+The `stdYPLL()` function of the `epiDeaths` package calculates the ASYPLL for a specific cause of death. For example,
 
-# Software design
+```r
+d    <- c(0,0,1,12,60,100,137,200,225,236,237,258,226)
+pop  <- c(1787296,648467,752059,783322,808350,881275,892896,
+          771218,713233,649157,581323,472760,356725)
+Nref <- c(3906682,1396816,1584091,1655473,1730527,1873165,1902856,
+           1639164,1534930,1433780,1294948,1054437,795497)
+ages <- c(0,15,20,25,30,35,40,45,50,55,60,65,70)
+stdYPLL(d,pop,Nref,ages)
+```
+returns a list with five components:
 
-The development of `epiDeaths` made extensive use of the `roxygen2` package [@roxygen2_cit] and greatly benefited from
-the `pkgdown` package [@pkgdown_cit] and `RStudio` [@rstudio_cit].
+```r
+$out
+           d  mid    a     ad       P  asYPLLrates    Nref     asYPLL
+0 to 14    0  7.5 67.5    0.0 1787296 0.000000e+00 3906682     0.0000
+15 to 19   0 17.5 57.5    0.0  648467 0.000000e+00 1396816     0.0000
+20 to 24   1 22.5 52.5   52.5  752059 6.980835e-05 1584091   110.5828
+25 to 29  12 27.5 47.5  570.0  783322 7.276701e-04 1655473  1204.6382
+30 to 34  60 32.5 42.5 2550.0  808350 3.154574e-03 1730527  5459.0757
+35 to 39 100 37.5 37.5 3750.0  881275 4.255198e-03 1873165  7970.6888
+40 to 44 137 42.5 32.5 4452.5  892896 4.986583e-03 1902856  9488.7494
+45 to 49 200 47.5 27.5 5500.0  771218 7.131576e-03 1639164 11689.8231
+50 to 54 225 52.5 22.5 5062.5  713233 7.097961e-03 1534930 10894.8732
+55 to 59 236 57.5 17.5 4130.0  649157 6.362097e-03 1433780  9121.8479
+60 to 64 237 62.5 12.5 2962.5  581323 5.096134e-03 1294948  6599.2287
+65 to 69 258 67.5  7.5 1935.0  472760 4.092986e-03 1054437  4315.7957
+70 to 74 226 72.5  2.5  565.0  356725 1.583853e-03  795497  1259.9504
 
-`Gala`'s design philosophy is based on three core principles: (1) to provide a
-user-friendly, modular, object-oriented API, (2) to use community tools and
-standards (e.g., Astropy for coordinates and units handling), and (3) to use
-low-level code (C/C++/Cython) for performance while keeping the user interface
-in Python. Within each of the main subpackages in `gala` (`gala.potential`,
-`gala.dynamics`, `gala.integrate`, etc.), we try to maintain a consistent API
-for classes and functions. For example, all potential classes share a common
-base class and implement methods for computing the potential, forces, density,
-and other derived quantities at given positions. This also works for
-compositions of potentials (i.e., multi-component potential models), which
-share the potential base class but also act as a dictionary-like container for
-different potential components. As another example, all integrators implement a
-common interface for numerically integrating orbits. The integrators and core
-potential functions are all implemented in C without support for units, but the
-Python layer handles unit conversions and prepares data to dispatch to the C
-layer appropriately.Within the coordinates subpackage, we extend Astropy's
-coordinate classes to add more specialized coordinate frames and
-transformations that are relevant for Galactic dynamics and Milky Way research.
+$ypll
+[1] 31530
 
-# Research impact statement
+$ypllrate
+[1] 31.22375
 
-`Gala` has demonstrated significant research impact and grown both its user base
-and contributor community since its initial release. The package has evolved
-through contributions from over 18 developers beyond the original core developer
-(@adrn), with community members adding new features, reporting bugs, and
-suggesting new features.
+$stdypll
+[1] 68115.25
 
-While `Gala` started as a tool primarily to support the core developer's
-research, it has expanded organically to support a range of applications across
-domains in astrophysics related to Milky Way and galactic dynamics. The package
-has been used in over 400 publications (according to Google Scholar) spanning
-topics in galactic dynamics such as modeling stellar streams [@Pearson:2017],
-Milky Way mass modeling, and interpreting kinematic and stellar population
-trends in the Galaxy. `Gala` is integrated within the Astropy ecosystem as an
-affiliated package and has built functionality that extends the widely-used
-`astropy.units` and `astropy.coordinates` subpackages. `Gala`'s impact extends
-beyond citations in research: Because of its focus on usability and user
-interface design, `Gala` has also been incorporated into graduate-level galactic
-dynamics curricula at multiple institutions.
+$stdypllrate
+[1] 31.24214
+```
 
-`Gala` has been downloaded over 100,000 times from PyPI and conda-forge yearly
-(or ~2,000 downloads per week) over the past few years, demonstrating a broad
-and active user community. Users span career stages from graduate students to
-faculty and other established researchers and represent institutions around the
-world. This broad adoption and active participation validate `Gala`'s role as
-core community infrastructure for galactic dynamics research.
+This output includes `out` (a matrix containing in its columns the number of deaths in each age group $d_i$, the correspondent midpoint of age, the difference between the midpoint of age and $K$ ($a_i$), the product $a_i d_i$, the population size for each age group within the reference population, the age‑specific YPLL rates (YPLL per person), and the age‑specific YPLL, respectively), `ypll` (the crude estimate of YPLL), `ypllrate` (the YPLL rate in years per `fac` people), `stdypll` (the age‐standardized YPLL), and `stdypllrate` (the age‐standardized YPLL rate in years per `fac` people).
 
-# Mathematics
+## An age pyramid
 
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
+The `bar2plot()` function produces a graph similar to an age pyramid (or population pyramid). It illustrates the distribution of different age groups within a population, categorised by gender. Males are displayed on the left and females on the right, with the youngest age groups at the base and the oldest at the top. For example, consider the Brazilian population according to the 2022 Demographic Census (data from the Brazilian Institute of Geography and Statistics, IBGE).
 
-Double dollars make self-standing equations:
+```r
+x <- c(6461689, 7011282, 6992746, 7317515, 7767306, 7627458, 7537285,
+       7827333, 7781059, 6549109, 6014391, 5419505, 4605834, 3588052,
+       2615350, 1657786, 1009852,  493649,  194341,   50319,   10570)
+y <- c(6243171, 6738158, 6682215, 7058427, 7699157, 7842265, 7935832,
+       8345458, 8291111, 7091003, 6584190, 6149601, 5338555, 4288180,
+       3243186, 2189593, 1465178,  835554,  385388,  114859,   27244)
+ages <- c( "0 to 4",   "5 to 9",  "10 to 14", "15 to 19", "20 to 24",
+          "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49",
+          "50 to 54", "55 to 59", "60 to 64", "65 to 69", "70 to 74",
+          "75 to 79", "80 to 84", "85 to 89", "90 to 94", "95 to 99",
+          "100+")
+bar2plot(x,y,main="Brazil 2022",cexleg=0.8,border=NA,legm=ages,cexlegm=0.8)
+```
 
-$$\Theta(x) = \left{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
+Figure 2 shows the resulting graph.
 
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
+# Dependencies
 
-# Citations
+The `epiDeaths` package has no dependencies, or say, it does not require any external packages to be installed to perform its core functions. However, the development of `epiDeaths` made extensive use of the `roxygen2` package [@roxygen2_cit] and greatly benefited from the `pkgdown` package [@pkgdown_cit] and `RStudio` [@rstudio_cit].
 
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
+# Conclusions
 
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
+@Chudasama describe other methods for estimating years of life lost (YLL), including the GBD (Global Burden of Disease) method, life tables, parametric models based on the Poisson distribution and Royston-Parmar’s flexible parametric survival models. The GBD method is detailed by @Aragon, including a R code to obtain the YLL, while the Royston-Parmar method uses restricted cubic splines to obtain smoothed survival curves as an alternative to the traditional Cox proportional hazards model [@Royston]. @Chudasama note that estimates of YLL may vary depending on the method used. 
 
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
-
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+It is hoped that using the `epiDeaths` package will reduce the time taken to process and analyse data from health information systems, thereby enabling epidemiological research into mortality indicators to be completed more quickly. This user-friendly tool provides support for researchers, students and technical staff working in public health surveillance, and is easy to use even for those with little programming experience.
 
 # AI usage disclosure
 
-No generative AI tools were used in the development of this software, the writing
-of this manuscript, or the preparation of supporting materials.
+No generative AI tools were used in the development of the `epiDeaths` package, the writing of this manuscript, or the preparation of supporting materials. The machine translation tool DeepL was used to review linguistic accuracy and grammar.
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+This project was financed in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - Brasil (CAPES) - Finance Code 001.
 
 # Conflict of interest
 
