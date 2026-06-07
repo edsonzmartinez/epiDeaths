@@ -34,7 +34,9 @@ spreadsheets, such as Microsoft Excel. Figure 1 shows the hex sticker
 for the `epiDeaths` package, generated using the `hexSticker` package
 \[@hexSticker_cit\].
 
-![](inst/figures/ggplot2.png)
+![Figure 1. Hex sticker.](reference/figures/logo.png)
+
+**Figure 1.** Hex sticker for the `epiDeaths` package.
 
 # Usage
 
