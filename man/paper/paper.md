@@ -321,7 +321,7 @@ bar2plot(x,y,main="Brazil 2022",cexleg=0.8,border=NA,legm=ages,cexlegm=0.8)
 Figure 2 shows the resulting graph.
 
 <figure>
-<img src="paper/Figure2.png" alt="Figure 2. Age pyramid for the Brazilian population according to the 2022 Demographic Census." height="400"/>
+<img src="man/paper/Figure2.png" alt="Figure 2. Age pyramid for the Brazilian population according to the 2022 Demographic Census." height="400"/>
 <figcaption aria-hidden="true"><strong>Figure 2.</strong> Hex sticker for the `epiDeaths` package.</figcaption>
 </figure>
 

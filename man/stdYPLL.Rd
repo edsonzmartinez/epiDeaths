@@ -39,7 +39,7 @@ where \eqn{K^*} is the number of age groups between 0 and K, \eqn{a_i} is the di
 
 The age‐standardized YPLL rate is given by
 \deqn{ASYPLL\ rate = \dfrac{ASYPLL}{\sum_{i=1}^{K^*} N_i} \times C}
-These measure is interpreted in years per \eqn{C} people, where \eqn{C} is specified by the argument \code{fac}.
+This measure is interpreted in years per \eqn{C} people, where \eqn{C} is specified by the argument \code{fac}.
 }
 \examples{
 # Example 1
