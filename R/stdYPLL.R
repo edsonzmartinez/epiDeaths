@@ -13,7 +13,7 @@
 #'
 #' The age‐standardized YPLL rate is given by
 #' \deqn{ASYPLL\ rate = \dfrac{ASYPLL}{\sum_{i=1}^{K^*} N_i} \times C}
-#' These measure is interpreted in years per \eqn{C} people, where \eqn{C} is specified by the argument \code{fac}.
+#' This measure is interpreted in years per \eqn{C} people, where \eqn{C} is specified by the argument \code{fac}.
 #' @references
 #' Silva Filho, A.M.D., Araújo, E.M.D., Souza, I.M.D., Luiz, O.D.C., Máximo, G., Queiroz, F.D.A., Cavalcante, L., Nisida, V. (2024). Years of potential life lost due to COVID-19 according to race/color and gender in Brazil between 2020 and 2021. Ciência & Saúde Coletiva, 29, e04702023. doi: 10.1590/1413-81232024293.04702023EN
 #' @examples

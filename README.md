@@ -4,6 +4,12 @@
 # epiDeaths
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/epiDeaths)](https://CRAN.R-project.org/package=epiDeaths)
+[![](https://cranlogs.r-pkg.org/badges/epiDeaths)](https://cran.rstudio.com/web/packages/epiDeaths/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/epiDeaths)](https://cran.r-project.org/package=epiDeaths)
+
 <!-- badges: end -->
 
 epiDeaths is an R package designed to provide functions for calculating
@@ -15,7 +21,7 @@ mortality rate (direct standardisation), years of potential life lost
 (Gardner and Sanborn, 1990; Ma, Ward, Siegel and Jemal, 2015), and
 age-standardised years of potential life lost (Silva Filho et al.,
 2024). Confidence intervals for the standardised mortality ratio are
-obtained according to Vandenbroucke (1982) and Ulm (1990). The function
+obtained according to Vandenbroucke (1982) and Ulm (1990). The package
 also includes a function that produces a graph similar to an age
 pyramid.
 
