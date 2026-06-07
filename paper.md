@@ -1,7 +1,13 @@
 # Summary
 
-The epiDeaths package is an open-source R package designed for
-calculating mortality indicators. The package enables tr
+The `epiDeaths` package is an open-source R package \[@r_citation\]
+designed for calculating mortality indicators. The package enables users
+to calculate geometric interpolation between two periods and projections
+for future years, the standardised mortality ratio, the age-adjusted
+mortality rate (direct standardisation), the years of potential life
+lost, and the age-standardised years of potential life lost. The package
+also includes a function that produces a graph similar to an age
+pyramid.
 
 # Statement of need
 
@@ -24,7 +30,11 @@ and was designed to be used by epidemiological researchers,
 professionals working in public health surveillance, and by students in
 courses on epidemiology or public health. It can significantly reduce
 the time spent calculating indicators, which are often produced using
-spreadsheets, such as Microsoft Excel.
+spreadsheets, such as Microsoft Excel. Figure 1 shows the hex sticker
+for the `epiDeaths` package, generated using the `hexSticker` package
+\[@hexSticker_cit\].
+
+![](inst/figures/ggplot2.png)
 
 # Usage
 
@@ -542,5 +552,9 @@ materials.
 We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and
 Semyeong Oh, and support from Kathryn Johnston during the genesis of
 this project.
+
+# Conflict of interest
+
+The authors declare no conflict of interest.
 
 # References
