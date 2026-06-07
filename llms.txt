@@ -1,5 +1,7 @@
 # epiDeaths
 
+![](/reference/figures/logo.png)
+
 epiDeaths is an R package designed to provide functions for calculating
 mortality indicators. These include geometric interpolation between two
 periods and projections for future years, as described in the textbook
