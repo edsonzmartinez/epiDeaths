@@ -33,13 +33,15 @@ aas-journal: Journal of Open Source Software.
 
 # Summary
 
-The epiDeaths package is an open-source R package designed for calculating mortality indicators. The package enables tr
+The `epiDeaths` package is an open-source R package [@r_citation] designed for calculating mortality indicators. The package enables users to calculate geometric  interpolation between two periods and projections for future years, the standardised mortality ratio, the age-adjusted mortality rate (direct standardisation), the years of potential life lost, and the age-standardised years of potential life lost. The package also includes a function that produces a graph similar to an age pyramid.
 
 # Statement of need
 
 Studies of mortality are essential for public health. They enable us to identify the leading causes of death in different regions and age groups, helping governments to prioritise investment in areas such as sanitation and infrastructure, and evaluate the effectiveness of public policies established to ensure integral health care within a given population. Different type of mortality indicators are used to understand mortality trend in an population, as the standardized mortality ratio, the age-adjusted mortality rate, the years of potential life lost, and the age‐standardized years of potential life lost. `epiDeaths` is an R package that provides functions designed to make it easier to obtain these mortality indicators. 
 
-`epiDeaths` is available both on [Github](https://github.com/edsonzmartinez/epiDeaths) and [CRAN](https://cran.r-project.org/web/packages/epiDeaths/index.html), and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets, such as Microsoft Excel.
+`epiDeaths` is available both on [Github](https://github.com/edsonzmartinez/epiDeaths) and [CRAN](https://cran.r-project.org/web/packages/epiDeaths/index.html), and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets, such as Microsoft Excel. Figure 1 shows the hex sticker for the `epiDeaths` package, generated using the `hexSticker` package [@hexSticker_cit]. 
+
+<img src="inst/figures/ggplot2.png" height="300"/>
 
 # Usage
 
@@ -378,5 +380,9 @@ of this manuscript, or the preparation of supporting materials.
 
 We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
 Oh, and support from Kathryn Johnston during the genesis of this project.
+
+# Conflict of interest
+
+The authors declare no conflict of interest.
 
 # References
