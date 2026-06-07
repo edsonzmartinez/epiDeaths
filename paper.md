@@ -21,7 +21,7 @@ affiliations:
    ror: 036rp1748
 date: 23 May 2026
 bibliography: paper.bib
-link-citations: true
+
 
 # Journal of Open Source Software
 
@@ -45,9 +45,9 @@ Studies of mortality are essential for public health. They enable us to identify
 
 ## Age-adjusted mortality rates
 
-Age-adjusted rates were developed in 1841 for the analysis of mortality data (3). It are used to compare relative mortality risks among groups and over time. The age-adjusted mortality rate (AAMR) enables mortality rates to be compared between different populations by taking into account the differences in their age structures. It is calculated using a standard population as a reference to help eliminate the effect of age when making comparisons. According to @Curtin, there are two main types of reference population: internal and external. Internal reference populations are created using the data to be analysed. For example, the authors mention the average age distribution of all populations to be compared. One disadvantage of using an internal reference population is that the results cannot be compared with those obtained in other studies that used a different reference population. External reference populations are those that are not used in the data analysis. @Curtin note, for example, that many studies typically use US population data provided by the National Center for Health Statistics (NCHS) for this purpose.
+Age-adjusted rates were developed in 1841 for the analysis of mortality data [@Neison; @Curtin]. It are used to compare relative mortality risks among groups and over time. The age-adjusted mortality rate (AAMR) enables mortality rates to be compared between different populations by taking into account the differences in their age structures. It is calculated using a standard population as a reference to help eliminate the effect of age when making comparisons. According to @Curtin, there are two main types of reference population: internal and external. Internal reference populations are created using the data to be analysed. For example, the authors mention the average age distribution of all populations to be compared. One disadvantage of using an internal reference population is that the results cannot be compared with those obtained in other studies that used a different reference population. External reference populations are those that are not used in the data analysis. @Curtin note, for example, that many studies typically use US population data provided by the National Center for Health Statistics (NCHS) for this purpose.
 
-The `AAMR()` function of the `epiDeaths` package calculates the age-adjusted mortality rate using direct standardisation [@Bruce:2018]. For example,
+The `AAMR()` function of the `epiDeaths` package calculates the age-adjusted mortality rate using direct standardisation [@Bruce]. For example,
 
 ```r
 d    <- c(15,31,78)
@@ -132,7 +132,7 @@ $$expected = \sum_{i=1}^{I} \dfrac{N_{S,i} \times d_{P,i}}{N_{P,i}},$$
 
 where $N_{S,i}$ is the population size for the $i$-th age group within the study population ($i=1,...,I$), $d_{P,i}$ is the number of deaths in the $i$-th age group in the reference population, and $N_{P,i}$ is the number of people in the $i$-th age group in the standard population. In this example, it amounts to 2,075.811 deaths. Thus, the SMR is given by $1,802/2,075.811 = 0.8680944$.
 
-The `AAMR()` function returns a list with six components: `obs` (the observed number of deaths in each age group), `exp` (the expected number of death), `smr` (the standardized mortality ratio), `ci` (an approximate 95\% confidence interval for the SMR by using the method proposed by Vandenbroucke (1982)), `isr` (the indirectly standardised mortality rate per 10,000 inhabitants, given by 10,000 $\times$ SMR $\times$ crude death rate for the standard population [@Bruce:2018], and `tabm` (a matrix containing `d`, `pop`, `dref`, `Nref` and the expected number of deaths at each age group).
+The `AAMR()` function returns a list with six components: `obs` (the observed number of deaths in each age group), `exp` (the expected number of death), `smr` (the standardized mortality ratio), `ci` (an approximate 95\% confidence interval for the SMR by using the method proposed by Vandenbroucke (1982)), `isr` (the indirectly standardised mortality rate per 10,000 inhabitants, given by 10,000 $\times$ SMR $\times$ crude death rate for the standard population [@Bruce], and `tabm` (a matrix containing `d`, `pop`, `dref`, `Nref` and the expected number of deaths at each age group).
 
 ## Population interpolation and extrapolation
 
@@ -208,7 +208,7 @@ $$YPLL = \sum_{i=1}^{K^*} a_i d_i$$
 
 where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, and $K$ is the standard age of death. The midpoint of an age group is estimated as (lowest age + highest age + 1)/2.
 
-Different authors use different values for $K$. According to @Bruce:2018, historically, WHO has used life expectancy from Japan, this being the highest in the world. Other authors uses 75 years as the reference age because it approximates US life expectancy [@Ma].
+Different authors use different values for $K$. According to @Bruce, historically, WHO has used life expectancy from Japan, this being the highest in the world. Other authors uses 75 years as the reference age because it approximates US life expectancy [@Ma].
 
 The `YPLL()` function has three arguments, `d` (a vector containing the number of deaths in each age group), `ages` (a vector containing the lower limit of each age group), and `K` (the standard life expectancy age, the default is 75 years). For example,
 
@@ -278,6 +278,9 @@ transformations) while maintaining both performance through C implementations
 and usability through its Python interface.  
 
 # Software design
+
+The development of `epiDeaths` made extensive use of the `roxygen2` package [@roxygen2_cit] and greatly benefited from
+the `pkgdown` package [@pkgdown_cit] and `RStudio` [@rstudio_cit].
 
 `Gala`'s design philosophy is based on three core principles: (1) to provide a
 user-friendly, modular, object-oriented API, (2) to use community tools and
