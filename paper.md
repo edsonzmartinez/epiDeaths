@@ -17,7 +17,8 @@ life lost, and the age‐standardized years of potential life lost.
 `epiDeaths` is an R package that provides functions designed to make it
 easier to obtain these mortality indicators.
 
-`epiDeaths` is available both on GitHub (repo; docs) and CRAN, and was
+`epiDeaths` is available both on
+[Github](https://github.com/edsonzmartinez/epiDeaths) and CRAN, and was
 designed to be used by epidemiological researchers, professionals
 working in public health surveillance, and by students in courses on
 epidemiology or public health. It can significantly reduce the time
@@ -318,8 +319,8 @@ group, assuming a uniform distribution of deaths in each group, and
 $`K`$ is the standard age of death. The midpoint of an age group is
 estimated as (lowest age + highest age + 1)/2.
 
-Different authors use different values for $`K`$. According to Bruce et
-al. (2018), historically, WHO has used life expectancy from Japan, this
+Different authors use different values for $`K`$. According to
+@Bruce:2018, historically, WHO has used life expectancy from Japan, this
 being the highest in the world. Other authors uses 75 years as the
 reference age because it approximates US life expectancy \[@Ma\].
 
