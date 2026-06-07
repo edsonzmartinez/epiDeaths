@@ -75,7 +75,7 @@ population size for each age group within the reference population
 (`Nref`) (Silva Filho et al., 2024).
 
 The age‐standardized YPLL rate is given by \$\$ASYPLL\\ rate =
-\dfrac{ASYPLL}{\sum\_{i=1}^{K^\*} N_i} \times C\$\$ These measure is
+\dfrac{ASYPLL}{\sum\_{i=1}^{K^\*} N_i} \times C\$\$ This measure is
 interpreted in years per \\C\\ people, where \\C\\ is specified by the
 argument `fac`.
 
