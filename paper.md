@@ -39,7 +39,7 @@ The epiDeaths package is an open-source R package designed for calculating morta
 
 Studies of mortality are essential for public health. They enable us to identify the leading causes of death in different regions and age groups, helping governments to prioritise investment in areas such as sanitation and infrastructure, and evaluate the effectiveness of public policies established to ensure integral health care within a given population. Different type of mortality indicators are used to understand mortality trend in an population, as the standardized mortality ratio, the age-adjusted mortality rate, the years of potential life lost, and the age‐standardized years of potential life lost. `epiDeaths` is an R package that provides functions designed to make it easier to obtain these mortality indicators. 
 
-`epiDeaths` is available both on GitHub (repo; docs) and CRAN, and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets, such as Microsoft Excel.
+`epiDeaths` is available both on [Github](https://github.com/edsonzmartinez/epiDeaths) and CRAN, and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets, such as Microsoft Excel.
 
 # Usage
 
@@ -208,7 +208,7 @@ $$YPLL = \sum_{i=1}^{K^*} a_i d_i$$
 
 where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, and $K$ is the standard age of death. The midpoint of an age group is estimated as (lowest age + highest age + 1)/2.
 
-Different authors use different values for $K$. According to Bruce et al. (2018), historically, WHO has used life expectancy from Japan, this being the highest in the world. Other authors uses 75 years as the reference age because it approximates US life expectancy [@Ma].
+Different authors use different values for $K$. According to @Bruce:2018, historically, WHO has used life expectancy from Japan, this being the highest in the world. Other authors uses 75 years as the reference age because it approximates US life expectancy [@Ma].
 
 The `YPLL()` function has three arguments, `d` (a vector containing the number of deaths in each age group), `ages` (a vector containing the lower limit of each age group), and `K` (the standard life expectancy age, the default is 75 years). For example,
 
