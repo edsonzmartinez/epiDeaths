@@ -36,7 +36,7 @@ Studies of mortality are essential for public health. They enable us to identify
 `epiDeaths` is available both on [Github](https://github.com/edsonzmartinez/epiDeaths) and [CRAN](https://cran.r-project.org/web/packages/epiDeaths/index.html), and was designed to be used by epidemiological researchers, professionals working in public health surveillance, and by students in courses on epidemiology or public health. It can significantly reduce the time spent calculating indicators, which are often produced using spreadsheets, such as Microsoft Excel. Figure 1 shows the hex sticker for the `epiDeaths` package, generated using the `hexSticker` package [@hexSticker_cit]. 
 
 <figure>
-<img src="man/figures/logo.png" alt="Figure 1. Hex sticker." height="250"/>
+<img src="man/figures/logo.png" alt="Figure 1" height="250"/>
 <figcaption aria-hidden="true"><strong>Figure 1.</strong> Hex sticker for the `epiDeaths` package.</figcaption>
 </figure>
 
@@ -322,7 +322,7 @@ Figure 2 shows the resulting graph.
 
 <figure>
 <img src="man/paper/Figure2.png" alt="Figure 2. Age pyramid for the Brazilian population according to the 2022 Demographic Census." height="400"/>
-<figcaption aria-hidden="true"><strong>Figure 2.</strong> Hex sticker for the `epiDeaths` package.</figcaption>
+<figcaption aria-hidden="true"><strong>Figure 2.</strong>. Age pyramid for the Brazilian population according to the 2022 Demographic Census.</figcaption>
 </figure>
 
 # Dependencies
