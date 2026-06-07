@@ -1,6 +1,5 @@
 ---
 title: 'epiDeaths: a R package for calculating mortality indicators'
-output: html_document
 tags:
   - R
   - epidemiology
@@ -46,7 +45,7 @@ Studies of mortality are essential for public health. They enable us to identify
 
 ## Age-adjusted mortality rates
 
-Age-adjusted rates were developed in 1841 for the analysis of mortality data (3). It are used to compare relative mortality risks among groups and over time. The age-adjusted mortality rate (AAMR) enables mortality rates to be compared between different populations by taking into account the differences in their age structures. It is calculated using a standard population as a reference to help eliminate the effect of age when making comparisons. According to Curtin and Klein (1995), there are two main types of reference population: internal and external. Internal reference populations are created using the data to be analysed. For example, the authors mention the average age distribution of all populations to be compared. One disadvantage of using an internal reference population is that the results cannot be compared with those obtained in other studies that used a different reference population. External reference populations are those that are not used in the data analysis. Curtin and Klein (1995) note, for example, that many studies typically use US population data provided by the National Center for Health Statistics (NCHS) for this purpose.
+Age-adjusted rates were developed in 1841 for the analysis of mortality data (3). It are used to compare relative mortality risks among groups and over time. The age-adjusted mortality rate (AAMR) enables mortality rates to be compared between different populations by taking into account the differences in their age structures. It is calculated using a standard population as a reference to help eliminate the effect of age when making comparisons. According to @Curtin, there are two main types of reference population: internal and external. Internal reference populations are created using the data to be analysed. For example, the authors mention the average age distribution of all populations to be compared. One disadvantage of using an internal reference population is that the results cannot be compared with those obtained in other studies that used a different reference population. External reference populations are those that are not used in the data analysis. @Curtin note, for example, that many studies typically use US population data provided by the National Center for Health Statistics (NCHS) for this purpose.
 
 The `AAMR()` function of the `epiDeaths` package calculates the age-adjusted mortality rate using direct standardisation [@Bruce:2018]. For example,
 
@@ -133,7 +132,7 @@ $$expected = \sum_{i=1}^{I} \dfrac{N_{S,i} \times d_{P,i}}{N_{P,i}},$$
 
 where $N_{S,i}$ is the population size for the $i$-th age group within the study population ($i=1,...,I$), $d_{P,i}$ is the number of deaths in the $i$-th age group in the reference population, and $N_{P,i}$ is the number of people in the $i$-th age group in the standard population. In this example, it amounts to 2,075.811 deaths. Thus, the SMR is given by $1,802/2,075.811 = 0.8680944$.
 
-The `AAMR()` function returns a list with six components: `obs` (the observed number of deaths in each age group), `exp` (the expected number of death), `smr` (the standardized mortality ratio), `ci` (an approximate 95\% confidence interval for the SMR by using the method proposed by Vandenbroucke (1982)), `isr` (the indirectly standardised mortality rate per 10,000 inhabitants, given by 10,000 $\times$ SMR $\times$ crude death rate for the standard population (see Bruce et al., 2018, p. 110)), and `tabm` (a matrix containing `d`, `pop`, `dref`, `Nref` and the expected number of deaths at each age group).
+The `AAMR()` function returns a list with six components: `obs` (the observed number of deaths in each age group), `exp` (the expected number of death), `smr` (the standardized mortality ratio), `ci` (an approximate 95\% confidence interval for the SMR by using the method proposed by Vandenbroucke (1982)), `isr` (the indirectly standardised mortality rate per 10,000 inhabitants, given by 10,000 $\times$ SMR $\times$ crude death rate for the standard population [@Bruce:2018], and `tabm` (a matrix containing `d`, `pop`, `dref`, `Nref` and the expected number of deaths at each age group).
 
 ## Population interpolation and extrapolation
 
@@ -203,13 +202,13 @@ returns $283$.
 
 ## Years of potential life lost
 
-The concept of years of potential life lost (YPLL) involves estimating the average time a person would have lived had he or she not died prematurely (Gardner and Sanborn, 1990). Let $d_i$ represent the number of deaths due to a given cause within the $i$-th age group. The YPLL for this cause of death can be estimated using the following equation:
+The concept of years of potential life lost (YPLL) involves estimating the average time a person would have lived had he or she not died prematurely [@Gardner]. Let $d_i$ represent the number of deaths due to a given cause within the $i$-th age group. The YPLL for this cause of death can be estimated using the following equation:
 
 $$YPLL = \sum_{i=1}^{K^*} a_i d_i$$
 
 where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, and $K$ is the standard age of death. The midpoint of an age group is estimated as (lowest age + highest age + 1)/2.
 
-Different authors use different values for $K$. According to Bruce et al. (2018), historically, WHO has used life expectancy from Japan, this being the highest in the world. Other authors uses 75 years as the reference age because it approximates US life expectancy (Ma et al., 2015).
+Different authors use different values for $K$. According to Bruce et al. (2018), historically, WHO has used life expectancy from Japan, this being the highest in the world. Other authors uses 75 years as the reference age because it approximates US life expectancy [@Ma].
 
 The `YPLL()` function has three arguments, `d` (a vector containing the number of deaths in each age group), `ages` (a vector containing the lower limit of each age group), and `K` (the standard life expectancy age, the default is 75 years). For example,
 
@@ -248,7 +247,7 @@ Age-standardized years of potential life lost (ASYPLL) involves adjusting the YP
 
 $$ ASYPLL = \sum\limits_{i=1}^{K^*} \dfrac{a_i d_i}{p_i} N_i,$$
 
-where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, $d_i$ is the number of deaths in the $i$-th age group (`d`), $p_i$ is the population size for each age group within the study population (`pop`), and $N_i$ the population size for each age group within the reference population (`Nref`) (Silva Filho et al., 2024).
+where $K^*$ is the number of age groups between 0 and $K$, $a_i$ is the difference between $K$ and the midpoint of age in each age group, assuming a uniform distribution of deaths in each group, $d_i$ is the number of deaths in the $i$-th age group (`d`), $p_i$ is the population size for each age group within the study population (`pop`), and $N_i$ the population size for each age group within the reference population (`Nref`) [@Silva].
 
 The `stdYPLL()` function of the `epiDeaths` package calculates the ASYPLL for a specific cause of death. 
 
